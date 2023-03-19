@@ -6,8 +6,7 @@ from definitions import *
 
 # MODIFIABLE VARIABLES
 # FACTION POPULATION
-totalPop = 0
-militarists = 0
+militarists = 4
 xenPhobes = 0
 egalitarians = 0
 materialists = 0
@@ -15,10 +14,11 @@ pacifists = 0
 xenPhiles = 0
 authoritarians = 0
 spiritualists = 0
+totalPop = militarists + xenPhobes + egalitarians + materialists + pacifists + xenPhiles + authoritarians + spiritualists
 
 # PROPOSAL SETTINGS
-operation = RUN_ELECTION # RUN_ELECTION or SIM_PARLIAMENT
-ethicOfProposal = PACIFIST
+operation = SIM_PARLIAMENT # RUN_ELECTION or SIM_PARLIAMENT
+ethicOfProposal = MILITARIST
 twoThirdsREQ = False
 unanimousREQ = False
 crisisSolution = False
@@ -100,7 +100,7 @@ def runVote():
     inFavor = 0
     against = 0
     for i in parliament:
-        if i.vote(ethicOfProposal):
+        if i.vote(ethicOfProposal, crisisSolution, underThreat):
             inFavor+=1
         else:
             against+=1

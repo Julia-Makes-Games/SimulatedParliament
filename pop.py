@@ -31,19 +31,25 @@ class pop:
     def volitility(self):
         return self.__volitility
 
-    def vote(self, ethic):
+    def vote(self, ethic, crisisSolution, underThreat):
         voteNum = random.randint(0,100)
-        print(voteNum)
-        if voteNum <= self.__ethicsArr[ethic]:
+        if underThreat:
+            voteNum -= 25
+        elif crisisSolution:
+            voteNum -= 50
+        print(str(self.__ethicsArr[ethic]) + " - " + str(voteNum))
+        if self.__ethicsArr[ethic] - voteNum >= 0:
             return True
+        else:
+            return False
 
     def ethicsGen(self, popEthic):
         base = 5
         for i in range(8): # randomly assign odds of voting in favor, minimum of 5 - volitility, max 75 + volitility
             self.__ethicsArr[i] = base + random.randint(0,70) + (random.randint(-1,1)*self.__volitility)
         if popEthic == MILITARIST:
-            self.__ethicsArr[MILITARIST] = 100-self.__volitility
-            self.__ethicsArr[PACIFIST] = self.__ethicsArr[PACIFIST]-50
+            self.__ethicsArr[MILITARIST] = 100 - self.__volitility
+            self.__ethicsArr[PACIFIST] = self.__ethicsArr[PACIFIST] - 50
         elif popEthic == XENOPHOBE:
             self.__ethicsArr[XENOPHOBE] = 100 - self.__volitility
             self.__ethicsArr[XENOPHILE] = self.__ethicsArr[XENOPHILE] - 50
