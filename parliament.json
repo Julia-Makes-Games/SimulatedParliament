@@ -1,0 +1,46 @@
+[
+    {
+        "militarist": 80,
+        "xenophobe": 12,
+        "egalitarian": 32,
+        "materialist": 91,
+        "pacifist": 34,
+        "xenophile": 48,
+        "authoritarian": 49,
+        "spiritualist": 52,
+        "volitility": 20
+    },
+    {
+        "militarist": 80,
+        "xenophobe": 76,
+        "egalitarian": 50,
+        "materialist": 41,
+        "pacifist": 0,
+        "xenophile": 55,
+        "authoritarian": 33,
+        "spiritualist": 46,
+        "volitility": 20
+    },
+    {
+        "militarist": 99,
+        "xenophobe": 69,
+        "egalitarian": 17,
+        "materialist": 23,
+        "pacifist": 19,
+        "xenophile": 10,
+        "authoritarian": 35,
+        "spiritualist": 40,
+        "volitility": 1
+    },
+    {
+        "militarist": 92,
+        "xenophobe": 71,
+        "egalitarian": 44,
+        "materialist": 60,
+        "pacifist": 0,
+        "xenophile": 42,
+        "authoritarian": 75,
+        "spiritualist": 37,
+        "volitility": 8
+    }
+]
