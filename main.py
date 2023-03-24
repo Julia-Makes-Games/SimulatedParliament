@@ -6,23 +6,23 @@ from definitions import *
 
 # MODIFIABLE VARIABLES
 # FACTION POPULATION
-militarists = 4
+militarists = 0
 xenPhobes = 0
-egalitarians = 0
-materialists = 0
+egalitarians = 20
+materialists = 3
 pacifists = 0
-xenPhiles = 0
+xenPhiles = 35
 authoritarians = 0
 spiritualists = 0
 totalPop = militarists + xenPhobes + egalitarians + materialists + pacifists + xenPhiles + authoritarians + spiritualists
 
 # PROPOSAL SETTINGS
 operation = SIM_PARLIAMENT # RUN_ELECTION or SIM_PARLIAMENT
-ethicOfProposal = MILITARIST
+ethicOfProposal = SPIRITUALIST
 twoThirdsREQ = False
 unanimousREQ = False
 crisisSolution = False
-underThreat = False
+underThreat = True
 
 parliament: list = []
 
@@ -104,6 +104,7 @@ def runVote():
             inFavor+=1
         else:
             against+=1
+    print(str(inFavor) + " VS " + str(against))
     if unanimousREQ:
         if against != 0:
             print("VOTE FAILED")

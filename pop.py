@@ -37,7 +37,7 @@ class pop:
             voteNum -= 25
         elif crisisSolution:
             voteNum -= 50
-        print(str(self.__ethicsArr[ethic]) + " - " + str(voteNum))
+        #print(str(self.__ethicsArr[ethic]) + " - " + str(voteNum))
         if self.__ethicsArr[ethic] - voteNum >= 0:
             return True
         else:
