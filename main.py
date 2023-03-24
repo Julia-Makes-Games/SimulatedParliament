@@ -3,6 +3,7 @@ import random
 import os
 from pop import pop
 from definitions import *
+import tkinter
 
 # MODIFIABLE VARIABLES
 # FACTION POPULATION
