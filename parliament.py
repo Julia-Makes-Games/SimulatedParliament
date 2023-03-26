@@ -14,7 +14,7 @@ crisisSolution = False
 underThreat = True
 
 class parliament:
-    @dispatch(int, int, int, int, int, int, int, int)
+    @dispatch(int, int, int, int, int, int, int, int, int)
     def __init__(self, mil, xenPho, egal, mat, pac, xenPhi, auth, spir):
         self.__militarists = mil
         self.__xenophobes = xenPho
@@ -30,8 +30,6 @@ class parliament:
 
     @dispatch()
     def __init__(self):
-        self.__parliament = []
-        self.readParliament()
         self.__militarists = 0
         self.__xenophobes = 0
         self.__egalitarians = 0
@@ -40,6 +38,8 @@ class parliament:
         self.__xenophiles = 0
         self.__authoritarians = 0
         self.__spiritualists = 0
+        self.__parliament = []
+        self.readParliament()
         self.__totalPops = len(self.__parliament)
 
 
@@ -48,12 +48,46 @@ class parliament:
     def parliament(self):
         return self.__parliament
 
+    @property
+    def militarists(self):
+        return self.__militarists
+
+    @property
+    def xenophobes(self):
+        return self.__xenophobes
+
+    @property
+    def egalitarians(self):
+        return self.__egalitarians
+
+    @property
+    def materialists(self):
+        return self.__materialists
+
+    @property
+    def pacifists(self):
+        return self.__pacifists
+
+    @property
+    def xenophiles(self):
+        return self.__xenophiles
+
+    @property
+    def authoritarians(self):
+        return self.__authoritarians
+
+    @property
+    def spiritualists(self):
+        return self.__spiritualists
+
 
     def readParliament(self):
+        ethicBreakdown = [0, 0, 0, 0, 0, 0, 0, 0]
         with open("parliament.json", 'r') as inFile:
             data = json.load(inFile)
             for i in data:
                 primEthic = i.get("primary")
+                ethicBreakdown[primEthic]+=1
                 tempEthics = []
                 tempEthics.append(i.get("militarist"))
                 tempEthics.append(i.get("xenophobe"))
@@ -66,6 +100,16 @@ class parliament:
                 self.__parliament.append(pop(primEthic,tempEthics[MILITARIST], tempEthics[XENOPHOBE], tempEthics[EGALITARIAN],
                                       tempEthics[MATERIALIST], tempEthics[PACIFIST], tempEthics[XENOPHILE],
                                       tempEthics[AUTHORITARIAN], tempEthics[SPIRITUALIST], i.get("volitility")))
+            print(ethicBreakdown)
+            self.__militarists = ethicBreakdown[MILITARIST]
+            self.__xenophobes = ethicBreakdown[XENOPHOBE]
+            self.__egalitarians = ethicBreakdown[EGALITARIAN]
+            self.__materialists = ethicBreakdown[MATERIALIST]
+            self.__pacifists = ethicBreakdown[PACIFIST]
+            self.__xenophiles = ethicBreakdown[XENOPHILE]
+            self.__authoritarians = ethicBreakdown[AUTHORITARIAN]
+            self.__spiritualists = ethicBreakdown[SPIRITUALIST]
+
             self.__totalPops = len(self.__parliament)
 
     def storeParliament(self):
