@@ -6,12 +6,14 @@ class pop:
     @dispatch(int)
     def __init__(self, ethic: int):
         self.__volitility = random.randint(0,20)
+        self.__primaryEthic = ethic
         self.__ethicsArr = [0 for i in range(8)]
         self.ethicsGen(ethic)
 
-    @dispatch(int, int, int, int, int, int, int, int, int)
-    def __init__(self, mil, xepho, egal, mat, pac, xephi, auth, spir, vol):
+    @dispatch(int, int, int, int, int, int, int, int, int, int)
+    def __init__(self, prim, mil, xepho, egal, mat, pac, xephi, auth, spir, vol):
         self.__volitility = vol
+        self.__primaryEthic = prim
         self.__ethicsArr = [0 for i in range(8)]
         self.__ethicsArr[MILITARIST] = mil
         self.__ethicsArr[XENOPHOBE] = xepho
@@ -30,6 +32,10 @@ class pop:
     @property
     def volitility(self):
         return self.__volitility
+
+    @property
+    def primaryEthic(self):
+        return self.__primaryEthic
 
     def vote(self, ethic, crisisSolution, underThreat):
         voteNum = random.randint(0,100)

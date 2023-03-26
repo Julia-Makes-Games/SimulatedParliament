@@ -2,140 +2,90 @@ import json
 import random
 import os
 from pop import pop
+import parliament
 from definitions import *
-import tkinter
-
-# MODIFIABLE VARIABLES
-# FACTION POPULATION
-militarists = 0
-xenPhobes = 0
-egalitarians = 20
-materialists = 3
-pacifists = 0
-xenPhiles = 35
-authoritarians = 0
-spiritualists = 0
-totalPop = militarists + xenPhobes + egalitarians + materialists + pacifists + xenPhiles + authoritarians + spiritualists
-
-# PROPOSAL SETTINGS
-operation = SIM_PARLIAMENT # RUN_ELECTION or SIM_PARLIAMENT
-ethicOfProposal = SPIRITUALIST
-twoThirdsREQ = False
-unanimousREQ = False
-crisisSolution = False
-underThreat = True
-
-parliament: list = []
+import tkinter as tk
+import _tkinter
+from tkinter import ttk
 
 
-def createParliament(numMil, numXenPho, numEgal, numMat, numPac, numXenPhi, numAuth, numSpir):
-    global parliament
-    parliament = []
-    for i in range(totalPop):
-        if numMil != 0:
-            tempPop = pop(MILITARIST)
-            numMil = numMil - 1
-        elif numXenPho != 0:
-            tempPop = pop(XENOPHOBE)
-            numXenPho = numXenPho - 1
-        elif numEgal != 0:
-            tempPop = pop(EGALITARIAN)
-            numEgal = numEgal - 1
-        elif numMat != 0:
-            tempPop = pop(MATERIALIST)
-            numMat = numMat - 1
-        elif numPac != 0:
-            tempPop = pop(PACIFIST)
-            numPac = numPac - 1
-        elif numXenPhi != 0:
-            tempPop = pop(XENOPHILE)
-            numXenPhi = numXenPhi - 1
-        elif numAuth != 0:
-            tempPop = pop(AUTHORITARIAN)
-            numAuth = numAuth - 1
-        elif numSpir != 0:
-            tempPop = pop(SPIRITUALIST)
-            numSpir = numSpir - 1
-        else:
-            tempPop = pop(random.randint(0,8)) # Random ethics if population is larger than factions
-        parliament.append(tempPop)
-    storeParliament()
 
-def storeParliament():
-    output = []
-    for i in parliament:
-        temp = {
-            "militarist": i.ethicsArr[MILITARIST],
-            "xenophobe": i.ethicsArr[XENOPHOBE],
-            "egalitarian": i.ethicsArr[EGALITARIAN],
-            "materialist": i.ethicsArr[MATERIALIST],
-            "pacifist": i.ethicsArr[PACIFIST],
-            "xenophile": i.ethicsArr[XENOPHILE],
-            "authoritarian": i.ethicsArr[AUTHORITARIAN],
-            "spiritualist": i.ethicsArr[SPIRITUALIST],
-            "volitility": i.volitility
-        }
-        output.append(temp)
-    with open("parliament.json", 'w') as outFile:
-        json.dump(output,outFile, indent=4)
+root = tk.Tk() #initialize root for window
+root.geometry("700x500")
+frm = ttk.Frame(root, padding=10)
+frm.grid()
 
-def readParliament():
-    with open("parliament.json", 'r') as inFile:
-        data = json.load(inFile)
-        for i in data:
-            tempEthics = []
-            tempEthics.append(i.get("militarist"))
-            tempEthics.append(i.get("xenophobe"))
-            tempEthics.append(i.get("egalitarian"))
-            tempEthics.append(i.get("materialist"))
-            tempEthics.append(i.get("pacifist"))
-            tempEthics.append(i.get("xenophile"))
-            tempEthics.append(i.get("authoritarian"))
-            tempEthics.append(i.get("spiritualist"))
-            parliament.append(pop(tempEthics[MILITARIST],tempEthics[XENOPHOBE],tempEthics[EGALITARIAN],
-                                  tempEthics[MATERIALIST],tempEthics[PACIFIST],tempEthics[XENOPHILE],
-                                  tempEthics[AUTHORITARIAN],tempEthics[SPIRITUALIST],i.get("volitility")))
+entryMil = tk.Entry(root)
+entryMil.insert(0, 0)
+entryMil.grid(column=1, row=4)
+milLab = tk.Label(root, text="Number of Militarists: ").grid(column=0, row=4)
+
+entryXPho = tk.Entry(root)
+entryXPho.insert(0, 0)
+entryXPho.grid(column=1, row=5)
+xphoLab = tk.Label(root, text="Number of Xenophobes: ").grid(column=0, row=5)
+
+entryEgal = tk.Entry(root)
+entryEgal.insert(0, 0)
+entryEgal.grid(column=1, row=6)
+egalLab = tk.Label(root, text="Number of Egalitarians: ").grid(column=0, row=6)
+
+entryMat = tk.Entry(root)
+entryMat.insert(0, 0)
+entryMat.grid(column=1, row=7)
+matLab = tk.Label(root, text="Number of Materialists: ").grid(column=0, row=7)
+
+entryPac = tk.Entry(root)
+entryPac.insert(0, 0)
+entryPac.grid(column=1, row=8)
+pacLab = tk.Label(root, text="Number of Pacifists: ").grid(column=0, row=8)
+
+entryXPhi = tk.Entry(root)
+entryXPhi.insert(0, 0)
+entryXPhi.grid(column=1, row=9)
+xphiLab = tk.Label(root, text="Number of Xenophiles: ").grid(column=0, row=9)
+
+entryAuth = tk.Entry(root)
+entryAuth.insert(0, 0)
+entryAuth.grid(column=1, row=10)
+authLab = tk.Label(root, text="Number of Authoritarians: ").grid(column=0, row=10)
+
+entrySpir = tk.Entry(root)
+entrySpir.insert(0, 0)
+entrySpir.grid(column=1, row=11)
+spirLab = tk.Label(root, text="Number of Spiritualists: ").grid(column=0, row=11)
+
+ttk.Button(frm, text="Quit", command=root.destroy).grid(column=0, row=12)
+parliament = parliament.parliament()
+
+tk.Label(root, text="Select Ethic Aligned with Vote").grid(column=3, row=3)
+factionSelect = tk.IntVar(root,MILITARIST)
+
+tk.Radiobutton(root, text="Militarist Aligned Vote", variable=factionSelect, value=MILITARIST).grid(column=3, row=4)
+tk.Radiobutton(root, text="Xenophobe Aligned Vote", variable=factionSelect, value=XENOPHOBE).grid(column=3, row=5)
+tk.Radiobutton(root, text="Egalitarian Aligned Vote", variable=factionSelect, value=EGALITARIAN).grid(column=3, row=6)
+tk.Radiobutton(root, text="Materialist Aligned Vote", variable=factionSelect, value=MATERIALIST).grid(column=3, row=7)
+tk.Radiobutton(root, text="Pacifist Aligned Vote", variable=factionSelect, value=PACIFIST).grid(column=3, row=8)
+tk.Radiobutton(root, text="Xenophile Aligned Vote", variable=factionSelect, value=XENOPHILE).grid(column=3, row=9)
+tk.Radiobutton(root, text="Authoritarian Aligned Vote", variable=factionSelect, value=AUTHORITARIAN).grid(column=3, row=10)
+tk.Radiobutton(root, text="Spiritualist Aligned Vote", variable=factionSelect, value=SPIRITUALIST).grid(column=3, row=11)
 
 
-def runVote():
-    inFavor = 0
-    against = 0
-    for i in parliament:
-        if i.vote(ethicOfProposal, crisisSolution, underThreat):
-            inFavor+=1
-        else:
-            against+=1
-    print(str(inFavor) + " VS " + str(against))
-    if unanimousREQ:
-        if against != 0:
-            print("VOTE FAILED")
-            return False
-        else:
-            print("VOTE PASSED")
-            return True
-    elif twoThirdsREQ:
-        if inFavor >= int(2 * (totalPop) / 3):
-            print("VOTE PASSED")
-            return True
-        else:
-            print("VOTE FAILED")
-            return False
-    else:
-        if inFavor > against:
-            print("VOTE PASSED")
-            return True
-        elif inFavor == against:
-            print("STALEMATE, ANOTHER VOTE REQUIRED")
-            return runVote()
-        else:
-            print("VOTE FAILED")
-            return False
+ttk.Button(frm, text="Simulate Parliament", command=lambda: parliament.runVote(factionSelect.get())
+           ).grid(column=0,row=1)
 
-if operation == RUN_ELECTION:
-    createParliament(militarists, xenPhobes, egalitarians, materialists, pacifists, xenPhiles, authoritarians,spiritualists)
-    storeParliament()
-elif operation == SIM_PARLIAMENT:
-    readParliament()
-    runVote()
-else:
-    print("INVALID OPERATION")
+ttk.Button(frm, text="New Parliament", command= lambda: parliament.createParliament(int(entryMil.get()),
+                                                                                    int(entryXPho.get()),
+                                                                                    int(entryEgal.get()),
+                                                                                    int(entryMat.get()),
+                                                                                    int(entryPac.get()),
+                                                                                    int(entryXPhi.get()),
+                                                                                    int(entryAuth.get()),
+                                                                                    int(entrySpir.get()))
+           ).grid(column=0,row=2)
+ttk.Button(frm, text="Store Current Parliament", command=lambda: parliament.storeParliament()).grid(column=5, row=2)
+root.mainloop()
+
+
+
+
