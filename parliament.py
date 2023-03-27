@@ -1,17 +1,12 @@
+"""
+parliament.py stores the data for the parliament and runs the votes by calling vote on every pop object
+"""
 import json
 import random
-import os
 from pop import pop
 from definitions import *
 from multipledispatch import dispatch
 
-# PROPOSAL SETTINGS
-operation = SIM_PARLIAMENT # RUN_ELECTION or SIM_PARLIAMENT
-ethicOfProposal = SPIRITUALIST
-twoThirdsREQ = False
-unanimousREQ = False
-crisisSolution = False
-underThreat = True
 
 class parliament:
     @dispatch(int, int, int, int, int, int, int, int, int)

@@ -1,3 +1,7 @@
+"""
+pop.py acts as the individual vote weights for each member of parliament, which is randomly decided every
+vote cycle (Democratic gov't type in Stellaris is every 10 years)
+"""
 import random
 from definitions import *
 from multipledispatch import dispatch

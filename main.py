@@ -1,3 +1,6 @@
+"""
+main.py runs the GUI, and connects to parliament and pops to run the functions
+"""
 import json
 import random
 import os
@@ -20,7 +23,6 @@ def runVote():
         vote.set("VOTE FAILED  ")
     voteSession += 1
     ttk.Label(root, textvariable=vote).grid(column=1, row=15, ipadx=10, ipady=10, sticky=tk.W)
-    #print(outcome)
 
 outcome = True
 
