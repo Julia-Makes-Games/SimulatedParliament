@@ -24,15 +24,19 @@ def runVote():
 
 outcome = True
 
-root = tk.Tk() #initialize root for window
+root = tk.Tk() # initialize root for window
+#root.config(bg="white")
 root.geometry("800x500")
 root.title("Stellaris Parliament Simulator")
 root.resizable(False, False)
+
+#Set up a frame (Top right, contains all buttons)
 frm = ttk.Frame(root, padding=5)
 frm.grid()
+
 prevVotes = []
 parliament = parliament.parliament()
-voteSession = 0
+voteSession = 1
 
 entryMil = tk.Entry(root)
 entryMil.insert(0, parliament.militarists)

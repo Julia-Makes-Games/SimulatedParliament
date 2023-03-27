@@ -178,6 +178,7 @@ class parliament:
         self.__xenophiles = 0
         self.__authoritarians = 0
         self.__spiritualists = 0
+        self.__totalPops = 0
         self.storeParliament()
 
     def createParliament(self, numMil, numXenPho, numEgal, numMat, numPac, numXenPhi, numAuth, numSpir):
