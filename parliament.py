@@ -131,11 +131,14 @@ class parliament:
         with open("parliament.json", 'w') as outFile:
             json.dump(output, outFile, indent=4)
 
-    def runVote(self, factionBias):
+    def runVote(self, factionBias, twoThirdsREQ, unanimousREQ, atWar, underThreat):
         inFavor = 0
         against = 0
+        if self.__totalPops == 0:
+            print("NO PARLIAMENT PRESENT")
+            return False
         for i in self.parliament:
-            if i.vote(factionBias, crisisSolution, underThreat):
+            if i.vote(factionBias, atWar, underThreat):
                 inFavor += 1
             else:
                 against += 1
@@ -160,10 +163,22 @@ class parliament:
                 return True
             elif inFavor == against:
                 print("STALEMATE, ANOTHER VOTE REQUIRED")
-                return self.runVote(factionBias)
+                return self.runVote(factionBias, twoThirdsREQ, unanimousREQ, atWar, underThreat)
             else:
                 print("VOTE FAILED")
                 return False
+
+    def clearParliament(self, root):
+        self.__parliament = []
+        self.__militarists = 0
+        self.__xenophobes = 0
+        self.__egalitarians = 0
+        self.__materialists = 0
+        self.__pacifists = 0
+        self.__xenophiles = 0
+        self.__authoritarians = 0
+        self.__spiritualists = 0
+        self.storeParliament()
 
     def createParliament(self, numMil, numXenPho, numEgal, numMat, numPac, numXenPhi, numAuth, numSpir):
         self.__parliament = []

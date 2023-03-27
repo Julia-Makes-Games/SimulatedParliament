@@ -37,13 +37,13 @@ class pop:
     def primaryEthic(self):
         return self.__primaryEthic
 
-    def vote(self, ethic, crisisSolution, underThreat):
+    def vote(self, ethic, atWar, underThreat):
         voteNum = random.randint(0,100)
         if underThreat:
             voteNum -= 25
-        elif crisisSolution:
-            voteNum -= 50
         #print(str(self.__ethicsArr[ethic]) + " - " + str(voteNum))
+        if atWar and ethic == MILITARIST:
+            voteNum -= 15
         if self.__ethicsArr[ethic] - voteNum >= 0:
             return True
         else:
